@@ -1,0 +1,16 @@
+{
+  "name": "casamento",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "google:auth": "node scripts/google-oauth-setup.mjs",
+    "secrets:push": "node scripts/push-secrets.mjs",
+    "qr": "node scripts/qr.mjs",
+    "db:push": "supabase db push --linked",
+    "fn:deploy": "supabase functions deploy --project-ref epqqqficeryjsptvyioy"
+  },
+  "devDependencies": {
+    "qrcode": "1.5.4",
+    "supabase": "2.117.0"
+  }
+}

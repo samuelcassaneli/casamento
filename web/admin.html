@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex" />
+  <title>Galeria do Casal</title>
+  <link rel="icon" href="icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <main class="shell wide">
+    <header class="hero small">
+      <p class="eyebrow">Galeria privada</p>
+      <h1 id="couple" class="couple"></h1>
+    </header>
+
+    <section id="login" class="card" hidden>
+      <form id="login-form">
+        <label for="email" class="label">Seu email</label>
+        <input id="email" type="email" autocomplete="email" required />
+        <button class="btn primary" type="submit">Receber link de acesso</button>
+        <p id="login-msg" class="hint"></p>
+      </form>
+    </section>
+
+    <section id="gallery" hidden>
+      <div class="toolbar">
+        <p id="stats" class="stats"></p>
+        <input id="filter" type="search" placeholder="Filtrar por convidado" />
+        <button id="logout" class="link" type="button">sair</button>
+      </div>
+      <div id="groups"></div>
+    </section>
+  </main>
+  <script type="module" src="/src/admin.ts"></script>
+</body>
+</html>

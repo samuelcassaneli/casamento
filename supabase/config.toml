@@ -1,0 +1,10 @@
+project_id = "epqqqficeryjsptvyioy"
+
+[functions.create-upload]
+verify_jwt = false
+
+[functions.finalize-upload]
+verify_jwt = false
+
+[functions.media-proxy]
+verify_jwt = false
