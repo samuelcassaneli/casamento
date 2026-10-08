@@ -5,6 +5,7 @@
 // Requires GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET (Desktop OAuth client) in that same file.
 import { createServer } from "node:http";
 import { execFile } from "node:child_process";
+import { createInterface } from "node:readline";
 import { loadEnv, saveEnv } from "./env.mjs";
 
 const env = loadEnv();
@@ -33,10 +34,20 @@ const code = await new Promise((resolve, reject) => {
     const c = url.searchParams.get("code");
     res.end(c ? "Autorizado. Pode fechar esta aba." : "Falhou: " + url.searchParams.get("error"));
     server.close();
+    process.stdin.destroy();
     c ? resolve(c) : reject(new Error(url.searchParams.get("error")));
   }).listen(PORT, "127.0.0.1");
   console.log("Abra no navegador (logado na conta Google do casal):\n\n" + authUrl + "\n");
+  console.log("Se o navegador estiver em outro computador, a página final vai dar erro de conexão.");
+  console.log("Copie o endereço completo dessa página (http://127.0.0.1:53682/callback?code=...) e cole aqui:\n");
   execFile("xdg-open", [authUrl.toString()], () => {});
+  const rl = createInterface({ input: process.stdin });
+  rl.on("line", (line) => {
+    try {
+      const c = new URL(line.trim()).searchParams.get("code");
+      if (c) { rl.close(); server.close(); resolve(c); }
+    } catch { console.log("Endereço inválido, cole a URL inteira."); }
+  });
 });
 
 const tokenRes = await fetch("https://oauth2.googleapis.com/token", {
